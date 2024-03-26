@@ -32,10 +32,12 @@ class Lit {
       await this.connect();
     }
 
-    const authSig = await signAndSaveAuthMessage({
-      web3: client,
-      expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
-    });
+    // // Custom sign
+    // const authSig = await signAndSaveAuthMessage({
+    //   web3: client,
+    //   expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
+    // });
+    const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: this.chain });
     const { ciphertext, dataToEncryptHash } = await LitJsSdk.encryptString(
       {
         evmContractConditions,
@@ -63,10 +65,11 @@ class Lit {
       await this.connect()
     }
 
-    const authSig = await signAndSaveAuthMessage({
-      web3: client,
-      expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
-    });
+    // const authSig = await signAndSaveAuthMessage({
+    //   web3: client,
+    //   expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
+    // });
+    const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain: this.chain });
     console.log(ciphertext, dataToEncryptHash, accessControlConditions, this.litNodeClient, this.chain, authSig)
     const decryptedString = await LitJsSdk.decryptToString(
       {
