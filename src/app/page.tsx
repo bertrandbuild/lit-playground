@@ -57,6 +57,20 @@ function App() {
       },
     }];
 
+    const accsTest2 = [
+      {
+        contractAddress: "",
+        standardContractType: "",
+        chain: "polygon-mumbai",
+        method: "eth_getBalance",
+        parameters: [":userAddress", "latest"],
+        returnValueTest: {
+          comparator: ">=",
+          value: "1000000000000", // 0.000001 ETH
+        },
+      },
+    ];
+
     const data = await lit.encrypt(
       client,
       accs,
