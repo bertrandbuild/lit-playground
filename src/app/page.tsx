@@ -59,21 +59,24 @@ function App() {
 
     const accsTest2 = [
       {
-        contractAddress: "",
-        standardContractType: "",
-        chain: "polygon-mumbai",
-        method: "eth_getBalance",
-        parameters: [":userAddress", "latest"],
-        returnValueTest: {
-          comparator: ">=",
-          value: "1000000000000", // 0.000001 ETH
-        },
-      },
-    ];
+          "conditionType": "evmBasic",
+          "contractAddress": "0x3F87289e6Ec2D05C32d8A74CCfb30773fF549306",
+          "standardContractType": "ERC20",
+          "chain": "mumbai",
+          "method": "balanceOf",
+          "parameters": [
+              ":userAddress"
+          ],
+          "returnValueTest": {
+              "comparator": ">=",
+              "value": "1"
+          }
+      }
+  ];
 
     const data = await lit.encrypt(
       client,
-      accs,
+      accsTest2,
       "Encrypted message",
     );
 
@@ -83,7 +86,7 @@ function App() {
       client,
       data.ciphertext,
       data.dataToEncryptHash,
-      accs,
+      accsTest2,
     );
 
     console.log(result);
